@@ -29,13 +29,12 @@ namespace Server_Starter
         /// </summary>
         private void InitializeComponent()
         {
-            this.AutomaticRestartCheckBox = new System.Windows.Forms.CheckBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.HideProcessCheckBox = new System.Windows.Forms.CheckBox();
             this.ResetConfigurationBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.StartServerBtn = new System.Windows.Forms.Button();
+            this.MySQLBtn = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -51,7 +50,11 @@ namespace Server_Starter
             this.SetupWebServerBtn = new System.Windows.Forms.Button();
             this.WebServerTextBox = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.StopServerBtn = new System.Windows.Forms.Button();
+            this.ConsoleTextBox = new System.Windows.Forms.RichTextBox();
+            this.ServerRuntimeLabel = new System.Windows.Forms.Label();
+            this.WebserverBtn = new System.Windows.Forms.Button();
+            this.AuthServerBtn = new System.Windows.Forms.Button();
+            this.WorldServerBtn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -61,17 +64,6 @@ namespace Server_Starter
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // AutomaticRestartCheckBox
-            // 
-            this.AutomaticRestartCheckBox.AutoSize = true;
-            this.AutomaticRestartCheckBox.Location = new System.Drawing.Point(6, 42);
-            this.AutomaticRestartCheckBox.Name = "AutomaticRestartCheckBox";
-            this.AutomaticRestartCheckBox.Size = new System.Drawing.Size(143, 17);
-            this.AutomaticRestartCheckBox.TabIndex = 8;
-            this.AutomaticRestartCheckBox.Text = "AUTOMATIC RESTART";
-            this.AutomaticRestartCheckBox.UseVisualStyleBackColor = true;
-            this.AutomaticRestartCheckBox.CheckedChanged += new System.EventHandler(this.AutomaticRestartCheckBox_CheckedChanged);
             // 
             // HideProcessCheckBox
             // 
@@ -86,7 +78,7 @@ namespace Server_Starter
             // 
             // ResetConfigurationBtn
             // 
-            this.ResetConfigurationBtn.Location = new System.Drawing.Point(189, 34);
+            this.ResetConfigurationBtn.Location = new System.Drawing.Point(189, 13);
             this.ResetConfigurationBtn.Name = "ResetConfigurationBtn";
             this.ResetConfigurationBtn.Size = new System.Drawing.Size(113, 23);
             this.ResetConfigurationBtn.TabIndex = 10;
@@ -107,8 +99,11 @@ namespace Server_Starter
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.StopServerBtn);
-            this.tabPage1.Controls.Add(this.StartServerBtn);
+            this.tabPage1.Controls.Add(this.WorldServerBtn);
+            this.tabPage1.Controls.Add(this.AuthServerBtn);
+            this.tabPage1.Controls.Add(this.WebserverBtn);
+            this.tabPage1.Controls.Add(this.ConsoleTextBox);
+            this.tabPage1.Controls.Add(this.MySQLBtn);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -117,15 +112,14 @@ namespace Server_Starter
             this.tabPage1.Text = "Start Server";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // StartServerBtn
+            // MySQLBtn
             // 
-            this.StartServerBtn.Location = new System.Drawing.Point(6, 6);
-            this.StartServerBtn.Name = "StartServerBtn";
-            this.StartServerBtn.Size = new System.Drawing.Size(109, 23);
-            this.StartServerBtn.TabIndex = 0;
-            this.StartServerBtn.Text = "Start Server";
-            this.StartServerBtn.UseVisualStyleBackColor = true;
-            this.StartServerBtn.Click += new System.EventHandler(this.StartServerBtn_Click);
+            this.MySQLBtn.Location = new System.Drawing.Point(6, 6);
+            this.MySQLBtn.Name = "MySQLBtn";
+            this.MySQLBtn.Size = new System.Drawing.Size(311, 23);
+            this.MySQLBtn.TabIndex = 0;
+            this.MySQLBtn.Text = "Start Mysqlserver";
+            this.MySQLBtn.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
@@ -145,7 +139,6 @@ namespace Server_Starter
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.HideProcessCheckBox);
-            this.groupBox5.Controls.Add(this.AutomaticRestartCheckBox);
             this.groupBox5.Controls.Add(this.ResetConfigurationBtn);
             this.groupBox5.Location = new System.Drawing.Point(7, 182);
             this.groupBox5.Name = "groupBox5";
@@ -280,21 +273,56 @@ namespace Server_Starter
             this.tabPage3.Text = "Help";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // StopServerBtn
+            // ConsoleTextBox
             // 
-            this.StopServerBtn.Location = new System.Drawing.Point(6, 35);
-            this.StopServerBtn.Name = "StopServerBtn";
-            this.StopServerBtn.Size = new System.Drawing.Size(109, 23);
-            this.StopServerBtn.TabIndex = 1;
-            this.StopServerBtn.Text = "Stop Server";
-            this.StopServerBtn.UseVisualStyleBackColor = true;
-            this.StopServerBtn.Click += new System.EventHandler(this.StopServerBtn_Click);
+            this.ConsoleTextBox.Location = new System.Drawing.Point(6, 122);
+            this.ConsoleTextBox.Name = "ConsoleTextBox";
+            this.ConsoleTextBox.Size = new System.Drawing.Size(311, 126);
+            this.ConsoleTextBox.TabIndex = 2;
+            this.ConsoleTextBox.Text = "";
+            // 
+            // ServerRuntimeLabel
+            // 
+            this.ServerRuntimeLabel.AutoSize = true;
+            this.ServerRuntimeLabel.Location = new System.Drawing.Point(244, 6);
+            this.ServerRuntimeLabel.Name = "ServerRuntimeLabel";
+            this.ServerRuntimeLabel.Size = new System.Drawing.Size(105, 13);
+            this.ServerRuntimeLabel.TabIndex = 3;
+            this.ServerRuntimeLabel.Text = "RUNTIME: 00:00:00";
+            // 
+            // WebserverBtn
+            // 
+            this.WebserverBtn.Location = new System.Drawing.Point(6, 35);
+            this.WebserverBtn.Name = "WebserverBtn";
+            this.WebserverBtn.Size = new System.Drawing.Size(311, 23);
+            this.WebserverBtn.TabIndex = 3;
+            this.WebserverBtn.Text = "Start Webserver";
+            this.WebserverBtn.UseVisualStyleBackColor = true;
+            // 
+            // AuthServerBtn
+            // 
+            this.AuthServerBtn.Location = new System.Drawing.Point(6, 64);
+            this.AuthServerBtn.Name = "AuthServerBtn";
+            this.AuthServerBtn.Size = new System.Drawing.Size(311, 23);
+            this.AuthServerBtn.TabIndex = 4;
+            this.AuthServerBtn.Text = "Start Authserver";
+            this.AuthServerBtn.UseVisualStyleBackColor = true;
+            // 
+            // WorldServerBtn
+            // 
+            this.WorldServerBtn.Location = new System.Drawing.Point(6, 93);
+            this.WorldServerBtn.Name = "WorldServerBtn";
+            this.WorldServerBtn.Size = new System.Drawing.Size(311, 23);
+            this.WorldServerBtn.TabIndex = 5;
+            this.WorldServerBtn.Text = "Start Worldserver";
+            this.WorldServerBtn.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(355, 304);
+            this.Controls.Add(this.ServerRuntimeLabel);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Server Starter";
@@ -313,11 +341,11 @@ namespace Server_Starter
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.CheckBox AutomaticRestartCheckBox;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.CheckBox HideProcessCheckBox;
         private System.Windows.Forms.Button ResetConfigurationBtn;
@@ -325,7 +353,7 @@ namespace Server_Starter
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Button StartServerBtn;
+        private System.Windows.Forms.Button MySQLBtn;
         private System.Windows.Forms.Button SetupWebServerBtn;
         private System.Windows.Forms.TextBox WebServerTextBox;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -339,7 +367,11 @@ namespace Server_Starter
         private System.Windows.Forms.Button SetupWorldServer;
         private System.Windows.Forms.TextBox WorldServerTextBox;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button StopServerBtn;
+        private System.Windows.Forms.RichTextBox ConsoleTextBox;
+        private System.Windows.Forms.Label ServerRuntimeLabel;
+        private System.Windows.Forms.Button WebserverBtn;
+        private System.Windows.Forms.Button AuthServerBtn;
+        private System.Windows.Forms.Button WorldServerBtn;
     }
 }
 

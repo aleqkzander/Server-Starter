@@ -9,18 +9,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 
 namespace Server_Starter
 {
     public partial class Form1 : Form
     {
         private bool hideProcess;
-        private bool automaticRestart;
         private string webServer;
         private string mysqlServer;
         private string authServer;
         private string worldServer;
-
+        List<Process> processes;
+        string state = "loading";
 
         public Form1()
         {
@@ -32,19 +33,22 @@ namespace Server_Starter
         {
             // get properties
             hideProcess = Properties.Settings.Default.hide_process;
-            automaticRestart = Properties.Settings.Default.automatic_restart;
             webServer = Properties.Settings.Default.webserver_dir;
             mysqlServer = Properties.Settings.Default.mysql_dir;
             authServer = Properties.Settings.Default.auth_dir;
             worldServer = Properties.Settings.Default.world_dir;
 
-            // set forms
+            // set form
             HideProcessCheckBox.Checked = hideProcess;
-            AutomaticRestartCheckBox.Checked = automaticRestart;
             WebServerTextBox.Text = webServer;
             MySQLTextBox.Text = mysqlServer;
             AuthServerTextBox.Text = authServer;
             WorldServerTextBox.Text = worldServer;
+
+            // init
+            processes = new List<Process>();
+
+
         }
 
 
@@ -61,6 +65,29 @@ namespace Server_Starter
         }
 
 
+        /// <summary>
+        /// Use this method to start a process
+        /// </summary>
+        /// <param name="executable"></param>
+        private void StartProcess(string executable)
+        {
+            ProcessStartInfo info = new ProcessStartInfo();
+            info.WorkingDirectory = Path.GetDirectoryName(executable);
+            info.Arguments = "--console";
+            info.FileName = executable;
+            if (hideProcess) { info.WindowStyle = ProcessWindowStyle.Hidden; info.CreateNoWindow = true; }
+            else { info.WindowStyle = ProcessWindowStyle.Normal; info.CreateNoWindow = false; } 
+            Process process = Process.Start(info);
+            processes.Add(process);
+        }
+
+
+        private void ChangeButtonLabelOnClick(Button button, string name)
+        {
+            button.Text = name;
+        }
+
+
         private void SetupWebServerBtn_Click(object sender, EventArgs e)
         {
             // search for httpd
@@ -68,16 +95,14 @@ namespace Server_Starter
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                // file from dialog
+                // exe from dialog
                 webServer = openFileDialog.FileName;
-                // get path
-                FileInfo info = new FileInfo(webServer);
                 // worldserver path on settings
-                Properties.Settings.Default.world_dir = info.DirectoryName + webServer;
+                Properties.Settings.Default.webserver_dir = webServer;
                 // save settings
                 Properties.Settings.Default.Save();
                 // set text
-                WebServerTextBox.Text = webServer;
+                WebServerTextBox.Text = Properties.Settings.Default.webserver_dir;
             }
         }
 
@@ -91,10 +116,8 @@ namespace Server_Starter
             {
                 // path from dialog
                 mysqlServer = openFileDialog.FileName;
-                // get path
-                FileInfo info = new FileInfo(mysqlServer);
                 // mysqlserver path on settings
-                Properties.Settings.Default.mysql_dir = info.DirectoryName + mysqlServer;
+                Properties.Settings.Default.mysql_dir = mysqlServer;
                 // save settings
                 Properties.Settings.Default.Save();
                 // set text
@@ -112,10 +135,8 @@ namespace Server_Starter
             {
                 // path from dialog
                 authServer = openFileDialog.FileName;
-                // get path
-                FileInfo info = new FileInfo(authServer);
                 // authserver path on settings
-                Properties.Settings.Default.auth_dir = info.DirectoryName + authServer;
+                Properties.Settings.Default.auth_dir = authServer;
                 // save settings
                 Properties.Settings.Default.Save();
                 // set text
@@ -133,10 +154,8 @@ namespace Server_Starter
             {
                 // path from dialog
                 worldServer = openFileDialog.FileName;
-                // get path
-                FileInfo info = new FileInfo(worldServer);
                 // worldserver path on settings
-                Properties.Settings.Default.world_dir = info.DirectoryName + worldServer;
+                Properties.Settings.Default.world_dir = worldServer;
                 // save settings
                 Properties.Settings.Default.Save();
                 // set text
@@ -152,13 +171,6 @@ namespace Server_Starter
         }
 
 
-        private void AutomaticRestartCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.automatic_restart = Convert.ToBoolean(AutomaticRestartCheckBox.CheckState);
-            Properties.Settings.Default.Save();
-        }
-
-
         private void ResetConfigurationBtn_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Reset();
@@ -166,15 +178,5 @@ namespace Server_Starter
         }
 
 
-        private void StartServerBtn_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void StopServerBtn_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

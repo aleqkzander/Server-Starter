@@ -7,3 +7,12 @@ C:\Users\alexa\OneDrive\Dokumente\GitHub\Server-Starter\Server-Starter\Server-St
 C:\Users\alexa\OneDrive\Dokumente\GitHub\Server-Starter\Server-Starter\Server-Starter\obj\Debug\Server-Starter.csproj.CoreCompileInputs.cache
 C:\Users\alexa\OneDrive\Dokumente\GitHub\Server-Starter\Server-Starter\Server-Starter\obj\Debug\Server-Starter.exe
 C:\Users\alexa\OneDrive\Dokumente\GitHub\Server-Starter\Server-Starter\Server-Starter\obj\Debug\Server-Starter.pdb
+D:\Server-Starter\Server-Starter\Server-Starter\bin\Debug\Server-Starter.exe.config
+D:\Server-Starter\Server-Starter\Server-Starter\bin\Debug\Server-Starter.exe
+D:\Server-Starter\Server-Starter\Server-Starter\bin\Debug\Server-Starter.pdb
+D:\Server-Starter\Server-Starter\Server-Starter\obj\Debug\Server_Starter.Form1.resources
+D:\Server-Starter\Server-Starter\Server-Starter\obj\Debug\Server_Starter.Properties.Resources.resources
+D:\Server-Starter\Server-Starter\Server-Starter\obj\Debug\Server-Starter.csproj.GenerateResource.cache
+D:\Server-Starter\Server-Starter\Server-Starter\obj\Debug\Server-Starter.csproj.CoreCompileInputs.cache
+D:\Server-Starter\Server-Starter\Server-Starter\obj\Debug\Server-Starter.exe
+D:\Server-Starter\Server-Starter\Server-Starter\obj\Debug\Server-Starter.pdb
