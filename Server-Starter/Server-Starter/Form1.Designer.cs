@@ -34,6 +34,10 @@ namespace Server_Starter
             this.ResetConfigurationBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.WorldServerBtn = new System.Windows.Forms.Button();
+            this.AuthServerBtn = new System.Windows.Forms.Button();
+            this.WebserverBtn = new System.Windows.Forms.Button();
+            this.ConsoleTextBox = new System.Windows.Forms.RichTextBox();
             this.MySQLBtn = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -50,11 +54,7 @@ namespace Server_Starter
             this.SetupWebServerBtn = new System.Windows.Forms.Button();
             this.WebServerTextBox = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.ConsoleTextBox = new System.Windows.Forms.RichTextBox();
             this.ServerRuntimeLabel = new System.Windows.Forms.Label();
-            this.WebserverBtn = new System.Windows.Forms.Button();
-            this.AuthServerBtn = new System.Windows.Forms.Button();
-            this.WorldServerBtn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -112,6 +112,44 @@ namespace Server_Starter
             this.tabPage1.Text = "Start Server";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // WorldServerBtn
+            // 
+            this.WorldServerBtn.Location = new System.Drawing.Point(6, 93);
+            this.WorldServerBtn.Name = "WorldServerBtn";
+            this.WorldServerBtn.Size = new System.Drawing.Size(311, 23);
+            this.WorldServerBtn.TabIndex = 5;
+            this.WorldServerBtn.Text = "Start Worldserver";
+            this.WorldServerBtn.UseVisualStyleBackColor = true;
+            this.WorldServerBtn.Click += new System.EventHandler(this.WorldServerBtn_Click);
+            // 
+            // AuthServerBtn
+            // 
+            this.AuthServerBtn.Location = new System.Drawing.Point(6, 64);
+            this.AuthServerBtn.Name = "AuthServerBtn";
+            this.AuthServerBtn.Size = new System.Drawing.Size(311, 23);
+            this.AuthServerBtn.TabIndex = 4;
+            this.AuthServerBtn.Text = "Start Authserver";
+            this.AuthServerBtn.UseVisualStyleBackColor = true;
+            this.AuthServerBtn.Click += new System.EventHandler(this.AuthServerBtn_Click);
+            // 
+            // WebserverBtn
+            // 
+            this.WebserverBtn.Location = new System.Drawing.Point(6, 35);
+            this.WebserverBtn.Name = "WebserverBtn";
+            this.WebserverBtn.Size = new System.Drawing.Size(311, 23);
+            this.WebserverBtn.TabIndex = 3;
+            this.WebserverBtn.Text = "Start Webserver";
+            this.WebserverBtn.UseVisualStyleBackColor = true;
+            this.WebserverBtn.Click += new System.EventHandler(this.WebserverBtn_Click);
+            // 
+            // ConsoleTextBox
+            // 
+            this.ConsoleTextBox.Location = new System.Drawing.Point(6, 122);
+            this.ConsoleTextBox.Name = "ConsoleTextBox";
+            this.ConsoleTextBox.Size = new System.Drawing.Size(311, 126);
+            this.ConsoleTextBox.TabIndex = 2;
+            this.ConsoleTextBox.Text = "";
+            // 
             // MySQLBtn
             // 
             this.MySQLBtn.Location = new System.Drawing.Point(6, 6);
@@ -120,6 +158,7 @@ namespace Server_Starter
             this.MySQLBtn.TabIndex = 0;
             this.MySQLBtn.Text = "Start Mysqlserver";
             this.MySQLBtn.UseVisualStyleBackColor = true;
+            this.MySQLBtn.Click += new System.EventHandler(this.MySQLBtn_Click);
             // 
             // tabPage2
             // 
@@ -273,14 +312,6 @@ namespace Server_Starter
             this.tabPage3.Text = "Help";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // ConsoleTextBox
-            // 
-            this.ConsoleTextBox.Location = new System.Drawing.Point(6, 122);
-            this.ConsoleTextBox.Name = "ConsoleTextBox";
-            this.ConsoleTextBox.Size = new System.Drawing.Size(311, 126);
-            this.ConsoleTextBox.TabIndex = 2;
-            this.ConsoleTextBox.Text = "";
-            // 
             // ServerRuntimeLabel
             // 
             this.ServerRuntimeLabel.AutoSize = true;
@@ -289,33 +320,6 @@ namespace Server_Starter
             this.ServerRuntimeLabel.Size = new System.Drawing.Size(105, 13);
             this.ServerRuntimeLabel.TabIndex = 3;
             this.ServerRuntimeLabel.Text = "RUNTIME: 00:00:00";
-            // 
-            // WebserverBtn
-            // 
-            this.WebserverBtn.Location = new System.Drawing.Point(6, 35);
-            this.WebserverBtn.Name = "WebserverBtn";
-            this.WebserverBtn.Size = new System.Drawing.Size(311, 23);
-            this.WebserverBtn.TabIndex = 3;
-            this.WebserverBtn.Text = "Start Webserver";
-            this.WebserverBtn.UseVisualStyleBackColor = true;
-            // 
-            // AuthServerBtn
-            // 
-            this.AuthServerBtn.Location = new System.Drawing.Point(6, 64);
-            this.AuthServerBtn.Name = "AuthServerBtn";
-            this.AuthServerBtn.Size = new System.Drawing.Size(311, 23);
-            this.AuthServerBtn.TabIndex = 4;
-            this.AuthServerBtn.Text = "Start Authserver";
-            this.AuthServerBtn.UseVisualStyleBackColor = true;
-            // 
-            // WorldServerBtn
-            // 
-            this.WorldServerBtn.Location = new System.Drawing.Point(6, 93);
-            this.WorldServerBtn.Name = "WorldServerBtn";
-            this.WorldServerBtn.Size = new System.Drawing.Size(311, 23);
-            this.WorldServerBtn.TabIndex = 5;
-            this.WorldServerBtn.Text = "Start Worldserver";
-            this.WorldServerBtn.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

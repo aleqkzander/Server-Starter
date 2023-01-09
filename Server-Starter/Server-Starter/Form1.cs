@@ -20,8 +20,11 @@ namespace Server_Starter
         private string mysqlServer;
         private string authServer;
         private string worldServer;
-        List<Process> processes;
-        string state = "loading";
+        Process mysqlProcess = null;
+        Process webProcess = null;
+        Process authProcess = null;
+        Process worldProcess = null;
+
 
         public Form1()
         {
@@ -44,11 +47,6 @@ namespace Server_Starter
             MySQLTextBox.Text = mysqlServer;
             AuthServerTextBox.Text = authServer;
             WorldServerTextBox.Text = worldServer;
-
-            // init
-            processes = new List<Process>();
-
-
         }
 
 
@@ -69,22 +67,16 @@ namespace Server_Starter
         /// Use this method to start a process
         /// </summary>
         /// <param name="executable"></param>
-        private void StartProcess(string executable)
+        private Process SetupProcess(string executable)
         {
             ProcessStartInfo info = new ProcessStartInfo();
             info.WorkingDirectory = Path.GetDirectoryName(executable);
             info.Arguments = "--console";
             info.FileName = executable;
             if (hideProcess) { info.WindowStyle = ProcessWindowStyle.Hidden; info.CreateNoWindow = true; }
-            else { info.WindowStyle = ProcessWindowStyle.Normal; info.CreateNoWindow = false; } 
+            else { info.WindowStyle = ProcessWindowStyle.Normal; info.CreateNoWindow = false; }
             Process process = Process.Start(info);
-            processes.Add(process);
-        }
-
-
-        private void ChangeButtonLabelOnClick(Button button, string name)
-        {
-            button.Text = name;
+            return process;
         }
 
 
@@ -178,5 +170,70 @@ namespace Server_Starter
         }
 
 
+        private void MySQLBtn_Click(object sender, EventArgs e)
+        {
+            if (mysqlProcess == null)
+            {
+                Process sqlprocess = SetupProcess(mysqlServer);
+                mysqlProcess = sqlprocess;
+                MySQLBtn.Text = "Stop Mysqlserver";
+            }
+            else
+            {
+                mysqlProcess.Kill();
+                mysqlProcess = null;
+                MySQLBtn.Text = "Start Mysqlserver";
+            }
+        }
+
+
+        private void WebserverBtn_Click(object sender, EventArgs e)
+        {
+            if (webProcess == null)
+            {
+                Process webprocess = SetupProcess(webServer);
+                webProcess = webprocess;
+                WebserverBtn.Text = "Stop Webserver";
+            }
+            else
+            {
+                webProcess.Kill();
+                webProcess = null;
+                WebserverBtn.Text = "Start Webserver";
+            }
+        }
+
+
+        private void AuthServerBtn_Click(object sender, EventArgs e)
+        {
+            if (authProcess == null)
+            {
+                Process authprocess = SetupProcess(authServer);
+                authProcess = authprocess;
+                AuthServerBtn.Text = "Stop Authserver";
+            }
+            else
+            {
+                authProcess.Kill();
+                authProcess = null;
+                AuthServerBtn.Text = "Start Authserver";
+            }
+        }
+
+        private void WorldServerBtn_Click(object sender, EventArgs e)
+        {
+            if (worldProcess == null)
+            {
+                Process worldprocess = SetupProcess(worldServer);
+                worldProcess = worldprocess;
+                WorldServerBtn.Text = "Stop Worldserver";
+            }
+            else
+            {
+                worldProcess.Kill();
+                worldProcess = null;
+                WorldServerBtn.Text = "Start Worldserver";
+            }
+        }
     }
-}
+}  
