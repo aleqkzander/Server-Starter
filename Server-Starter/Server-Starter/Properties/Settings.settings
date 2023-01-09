@@ -14,7 +14,10 @@
     <Setting Name="world_dir" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="autuomatic_restart" Type="System.Boolean" Scope="User">
+    <Setting Name="automatic_restart" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="hide_process" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

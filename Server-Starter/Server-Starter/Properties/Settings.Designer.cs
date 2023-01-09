@@ -74,12 +74,24 @@ namespace Server_Starter.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool autuomatic_restart {
+        public bool automatic_restart {
             get {
-                return ((bool)(this["autuomatic_restart"]));
+                return ((bool)(this["automatic_restart"]));
             }
             set {
-                this["autuomatic_restart"] = value;
+                this["automatic_restart"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hide_process {
+            get {
+                return ((bool)(this["hide_process"]));
+            }
+            set {
+                this["hide_process"] = value;
             }
         }
     }

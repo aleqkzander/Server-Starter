@@ -1,7 +1,6 @@
 C:\Users\alexa\OneDrive\Dokumente\GitHub\Server-Starter\Server-Starter\Server-Starter\bin\Debug\Server-Starter.exe.config
 C:\Users\alexa\OneDrive\Dokumente\GitHub\Server-Starter\Server-Starter\Server-Starter\bin\Debug\Server-Starter.exe
 C:\Users\alexa\OneDrive\Dokumente\GitHub\Server-Starter\Server-Starter\Server-Starter\bin\Debug\Server-Starter.pdb
-C:\Users\alexa\OneDrive\Dokumente\GitHub\Server-Starter\Server-Starter\Server-Starter\obj\Debug\Server-Starter.csproj.AssemblyReference.cache
 C:\Users\alexa\OneDrive\Dokumente\GitHub\Server-Starter\Server-Starter\Server-Starter\obj\Debug\Server_Starter.Form1.resources
 C:\Users\alexa\OneDrive\Dokumente\GitHub\Server-Starter\Server-Starter\Server-Starter\obj\Debug\Server_Starter.Properties.Resources.resources
 C:\Users\alexa\OneDrive\Dokumente\GitHub\Server-Starter\Server-Starter\Server-Starter\obj\Debug\Server-Starter.csproj.GenerateResource.cache
