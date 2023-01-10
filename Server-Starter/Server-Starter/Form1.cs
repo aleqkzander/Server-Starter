@@ -16,15 +16,10 @@ namespace Server_Starter
     public partial class Form1 : Form
     {
         private bool hideProcess;
-        private string webServer;
-        private string mysqlServer;
-        private string authServer;
-        private string worldServer;
-        Process mysqlProcess = null;
-        Process webProcess = null;
-        Process authProcess = null;
-        Process worldProcess = null;
-
+        private string serverWeb;
+        private string serverSql;
+        private string serverAuth;
+        private string serverWorld;
 
         public Form1()
         {
@@ -36,19 +31,21 @@ namespace Server_Starter
         {
             // get properties
             hideProcess = Properties.Settings.Default.hide_process;
-            webServer = Properties.Settings.Default.webserver_dir;
-            mysqlServer = Properties.Settings.Default.mysql_dir;
-            authServer = Properties.Settings.Default.auth_dir;
-            worldServer = Properties.Settings.Default.world_dir;
+            serverWeb = Properties.Settings.Default.webserver_dir;
+            serverSql = Properties.Settings.Default.mysql_dir;
+            serverAuth = Properties.Settings.Default.auth_dir;
+            serverWorld = Properties.Settings.Default.world_dir;
 
-            // set form
+            // set in form
             HideProcessCheckBox.Checked = hideProcess;
-            WebServerTextBox.Text = webServer;
-            MySQLTextBox.Text = mysqlServer;
-            AuthServerTextBox.Text = authServer;
-            WorldServerTextBox.Text = worldServer;
+            WebServerTextBox.Text = serverWeb;
+            MySQLTextBox.Text = serverSql;
+            AuthServerTextBox.Text = serverAuth;
+            WorldServerTextBox.Text = serverWorld;
         }
 
+
+        #region METHODS
 
         /// <summary>
         /// Configure the openfiledialog
@@ -67,18 +64,50 @@ namespace Server_Starter
         /// Use this method to start a process
         /// </summary>
         /// <param name="executable"></param>
-        private Process SetupProcess(string executable)
+        private Process StartProcess(string executable)
         {
-            ProcessStartInfo info = new ProcessStartInfo();
-            info.WorkingDirectory = Path.GetDirectoryName(executable);
-            info.Arguments = "--console";
-            info.FileName = executable;
-            if (hideProcess) { info.WindowStyle = ProcessWindowStyle.Hidden; info.CreateNoWindow = true; }
-            else { info.WindowStyle = ProcessWindowStyle.Normal; info.CreateNoWindow = false; }
-            Process process = Process.Start(info);
-            return process;
+            try
+            {
+                ProcessStartInfo info = new ProcessStartInfo();
+                info.WorkingDirectory = Path.GetDirectoryName(executable);
+                info.Arguments = "--console";
+                info.FileName = executable;
+                if (hideProcess) { info.WindowStyle = ProcessWindowStyle.Hidden; info.CreateNoWindow = true; }
+                else { info.WindowStyle = ProcessWindowStyle.Normal; info.CreateNoWindow = false; }
+                Process process = Process.Start(info);
+                return process;
+            }
+            catch
+            {
+                MessageBox.Show("Error on starting");
+                return null;
+            }
         }
 
+
+        /// <summary>
+        /// Use this method to stop a process 
+        /// </summary>
+        /// <param name="process"></param>
+        private void KillProcess(string process)
+        {
+            try
+            {
+                foreach (var kill in Process.GetProcessesByName(process))
+                {
+                    kill.Kill();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        #endregion
+
+
+        #region CONFIGURATION
 
         private void SetupWebServerBtn_Click(object sender, EventArgs e)
         {
@@ -88,13 +117,13 @@ namespace Server_Starter
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 // exe from dialog
-                webServer = openFileDialog.FileName;
+                serverWeb = openFileDialog.FileName;
                 // worldserver path on settings
-                Properties.Settings.Default.webserver_dir = webServer;
+                Properties.Settings.Default.webserver_dir = serverWeb;
                 // save settings
                 Properties.Settings.Default.Save();
                 // set text
-                WebServerTextBox.Text = Properties.Settings.Default.webserver_dir;
+                WebServerTextBox.Text = serverWeb;
             }
         }
 
@@ -107,13 +136,13 @@ namespace Server_Starter
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 // path from dialog
-                mysqlServer = openFileDialog.FileName;
+                serverSql = openFileDialog.FileName;
                 // mysqlserver path on settings
-                Properties.Settings.Default.mysql_dir = mysqlServer;
+                Properties.Settings.Default.mysql_dir = serverSql;
                 // save settings
                 Properties.Settings.Default.Save();
                 // set text
-                MySQLTextBox.Text = mysqlServer;
+                MySQLTextBox.Text = serverSql;
             }
         }
 
@@ -126,13 +155,13 @@ namespace Server_Starter
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 // path from dialog
-                authServer = openFileDialog.FileName;
+                serverAuth = openFileDialog.FileName;
                 // authserver path on settings
-                Properties.Settings.Default.auth_dir = authServer;
+                Properties.Settings.Default.auth_dir = serverAuth;
                 // save settings
                 Properties.Settings.Default.Save();
                 // set text
-                AuthServerTextBox.Text = authServer;
+                AuthServerTextBox.Text = serverAuth;
             }
         }
 
@@ -145,13 +174,13 @@ namespace Server_Starter
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 // path from dialog
-                worldServer = openFileDialog.FileName;
+                serverWorld = openFileDialog.FileName;
                 // worldserver path on settings
-                Properties.Settings.Default.world_dir = worldServer;
+                Properties.Settings.Default.world_dir = serverWorld;
                 // save settings
                 Properties.Settings.Default.Save();
                 // set text
-                WorldServerTextBox.Text = worldServer;
+                WorldServerTextBox.Text = serverWorld;
             }
         }
 
@@ -169,71 +198,96 @@ namespace Server_Starter
             Application.Exit();
         }
 
+        #endregion
+
+
+        #region START/STOP SERVER
 
         private void MySQLBtn_Click(object sender, EventArgs e)
         {
-            if (mysqlProcess == null)
-            {
-                Process sqlprocess = SetupProcess(mysqlServer);
-                mysqlProcess = sqlprocess;
-                MySQLBtn.Text = "Stop Mysqlserver";
-            }
-            else
-            {
-                mysqlProcess.Kill();
-                mysqlProcess = null;
-                MySQLBtn.Text = "Start Mysqlserver";
-            }
+            // start sql
+            StartProcess(serverSql);
+
+            // enable web
+            WebserverBtn.Enabled = true;
+
+            // log console
+            ConsoleTextBox.Clear();
+            ConsoleTextBox.Text = "> Start Web-Server now...";
         }
 
 
         private void WebserverBtn_Click(object sender, EventArgs e)
         {
-            if (webProcess == null)
-            {
-                Process webprocess = SetupProcess(webServer);
-                webProcess = webprocess;
-                WebserverBtn.Text = "Stop Webserver";
-            }
-            else
-            {
-                webProcess.Kill();
-                webProcess = null;
-                WebserverBtn.Text = "Start Webserver";
-            }
+            // start web
+            StartProcess(serverWeb);
+
+            // enable auth
+            AuthServerBtn.Enabled = true;
+
+            // log console
+            ConsoleTextBox.Clear();
+            ConsoleTextBox.Text = "> Start Auth-Server now...";
         }
 
 
         private void AuthServerBtn_Click(object sender, EventArgs e)
         {
-            if (authProcess == null)
-            {
-                Process authprocess = SetupProcess(authServer);
-                authProcess = authprocess;
-                AuthServerBtn.Text = "Stop Authserver";
-            }
-            else
-            {
-                authProcess.Kill();
-                authProcess = null;
-                AuthServerBtn.Text = "Start Authserver";
-            }
+            // start auth
+            StartProcess(serverAuth);
+
+            // enable world
+            WorldServerBtn.Enabled = true;
+
+            // log console
+            ConsoleTextBox.Clear();
+            ConsoleTextBox.Text = "> Start World-Server now...";
         }
+
 
         private void WorldServerBtn_Click(object sender, EventArgs e)
         {
-            if (worldProcess == null)
-            {
-                Process worldprocess = SetupProcess(worldServer);
-                worldProcess = worldprocess;
-                WorldServerBtn.Text = "Stop Worldserver";
-            }
-            else
-            {
-                worldProcess.Kill();
-                worldProcess = null;
-                WorldServerBtn.Text = "Start Worldserver";
-            }
+            // start world
+            StartProcess(serverWorld);
+
+            // enable stop
+            StopServerBtn.Enabled = true;
+
+            // log console
+            ConsoleTextBox.Clear();
+            ConsoleTextBox.Text += "> Server is up and running...\n";
+            ConsoleTextBox.Text += "> You can stop the server now...\n";
+
         }
+
+
+        private void StopServerBtn_Click(object sender, EventArgs e)
+        {
+            // kill word and disable
+            KillProcess("worldserver");
+            WorldServerBtn.Enabled = false;
+
+            // kill auth and disable
+            KillProcess("authserver");
+            AuthServerBtn.Enabled = false;
+
+            // kill httpd and disable
+            KillProcess("httpd");
+            WebserverBtn.Enabled = false;
+
+            // kill mysql
+            KillProcess("mysqld");
+            
+            // disable stop server
+            StopServerBtn.Enabled = false;
+
+            // log console
+            ConsoleTextBox.Clear();
+            ConsoleTextBox.Text += "> Server stopped...\n";
+            ConsoleTextBox.Text += "> Start SQL-Server...\n";
+        }
+
+        #endregion
+
     }
 }  

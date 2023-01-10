@@ -55,6 +55,7 @@ namespace Server_Starter
             this.WebServerTextBox = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.ServerRuntimeLabel = new System.Windows.Forms.Label();
+            this.StopServerBtn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -99,6 +100,7 @@ namespace Server_Starter
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.StopServerBtn);
             this.tabPage1.Controls.Add(this.WorldServerBtn);
             this.tabPage1.Controls.Add(this.AuthServerBtn);
             this.tabPage1.Controls.Add(this.WebserverBtn);
@@ -114,41 +116,44 @@ namespace Server_Starter
             // 
             // WorldServerBtn
             // 
+            this.WorldServerBtn.Enabled = false;
             this.WorldServerBtn.Location = new System.Drawing.Point(6, 93);
             this.WorldServerBtn.Name = "WorldServerBtn";
             this.WorldServerBtn.Size = new System.Drawing.Size(311, 23);
             this.WorldServerBtn.TabIndex = 5;
-            this.WorldServerBtn.Text = "Start Worldserver";
+            this.WorldServerBtn.Text = "Start World-Server";
             this.WorldServerBtn.UseVisualStyleBackColor = true;
             this.WorldServerBtn.Click += new System.EventHandler(this.WorldServerBtn_Click);
             // 
             // AuthServerBtn
             // 
+            this.AuthServerBtn.Enabled = false;
             this.AuthServerBtn.Location = new System.Drawing.Point(6, 64);
             this.AuthServerBtn.Name = "AuthServerBtn";
             this.AuthServerBtn.Size = new System.Drawing.Size(311, 23);
             this.AuthServerBtn.TabIndex = 4;
-            this.AuthServerBtn.Text = "Start Authserver";
+            this.AuthServerBtn.Text = "Start Auth-Server";
             this.AuthServerBtn.UseVisualStyleBackColor = true;
             this.AuthServerBtn.Click += new System.EventHandler(this.AuthServerBtn_Click);
             // 
             // WebserverBtn
             // 
+            this.WebserverBtn.Enabled = false;
             this.WebserverBtn.Location = new System.Drawing.Point(6, 35);
             this.WebserverBtn.Name = "WebserverBtn";
             this.WebserverBtn.Size = new System.Drawing.Size(311, 23);
             this.WebserverBtn.TabIndex = 3;
-            this.WebserverBtn.Text = "Start Webserver";
+            this.WebserverBtn.Text = "Start Web-Server";
             this.WebserverBtn.UseVisualStyleBackColor = true;
             this.WebserverBtn.Click += new System.EventHandler(this.WebserverBtn_Click);
             // 
             // ConsoleTextBox
             // 
-            this.ConsoleTextBox.Location = new System.Drawing.Point(6, 122);
+            this.ConsoleTextBox.Location = new System.Drawing.Point(6, 151);
             this.ConsoleTextBox.Name = "ConsoleTextBox";
-            this.ConsoleTextBox.Size = new System.Drawing.Size(311, 126);
+            this.ConsoleTextBox.Size = new System.Drawing.Size(311, 97);
             this.ConsoleTextBox.TabIndex = 2;
-            this.ConsoleTextBox.Text = "";
+            this.ConsoleTextBox.Text = "> Start SQL-Server...";
             // 
             // MySQLBtn
             // 
@@ -156,7 +161,7 @@ namespace Server_Starter
             this.MySQLBtn.Name = "MySQLBtn";
             this.MySQLBtn.Size = new System.Drawing.Size(311, 23);
             this.MySQLBtn.TabIndex = 0;
-            this.MySQLBtn.Text = "Start Mysqlserver";
+            this.MySQLBtn.Text = "Start SQL-Server";
             this.MySQLBtn.UseVisualStyleBackColor = true;
             this.MySQLBtn.Click += new System.EventHandler(this.MySQLBtn_Click);
             // 
@@ -321,6 +326,17 @@ namespace Server_Starter
             this.ServerRuntimeLabel.TabIndex = 3;
             this.ServerRuntimeLabel.Text = "RUNTIME: 00:00:00";
             // 
+            // StopServerBtn
+            // 
+            this.StopServerBtn.Enabled = false;
+            this.StopServerBtn.Location = new System.Drawing.Point(6, 122);
+            this.StopServerBtn.Name = "StopServerBtn";
+            this.StopServerBtn.Size = new System.Drawing.Size(311, 23);
+            this.StopServerBtn.TabIndex = 6;
+            this.StopServerBtn.Text = "Stop Server";
+            this.StopServerBtn.UseVisualStyleBackColor = true;
+            this.StopServerBtn.Click += new System.EventHandler(this.StopServerBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -376,6 +392,7 @@ namespace Server_Starter
         private System.Windows.Forms.Button WebserverBtn;
         private System.Windows.Forms.Button AuthServerBtn;
         private System.Windows.Forms.Button WorldServerBtn;
+        private System.Windows.Forms.Button StopServerBtn;
     }
 }
 
